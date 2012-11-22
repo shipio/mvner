@@ -13,9 +13,12 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/cisimple-team/mvner"
 
   gem.files         = `git ls-files`.split("\n").reject {|f| f=~/^(?:spec|examples)\//}
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  #gem.executables   = ["mvn"]
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+
+  gem.add_dependency 'nokogiri'
+  gem.add_dependency 'active_support'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
