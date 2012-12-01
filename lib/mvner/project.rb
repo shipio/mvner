@@ -25,7 +25,7 @@ module Mvner
     private
 
     def modules_by_path
-      @modules_by_path ||= Hash[module_nodes.map{ |node|
+      @modules_by_path ||= ::HashWithIndifferentAccess[module_nodes.map{ |node|
          [node.content, Mvner::Project.new(File.join(File.dirname(@path), node.content, "pom.xml"), self)]
       }]
     end

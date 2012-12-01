@@ -1,6 +1,3 @@
-require 'active_support/concern'
-require 'active_support/inflector'
-
 module Mvner
   module Attributes
     extend ActiveSupport::Concern

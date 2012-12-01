@@ -50,6 +50,10 @@ describe Mvner::Project do
       project.modules["dependency2"].should_not be_nil
     end
 
+    it 'should have 1 module located at dependency2 and allow indifferent access to the hash' do
+      project.modules[:dependency2].should_not be_nil
+    end
+
   end
 
 end
