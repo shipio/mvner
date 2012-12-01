@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Mvner::Project do
   describe "when scanning the test-main maven android project" do
-    let(:project) { Mvner::Project.new 'android-sample/test-main/pom.xml' }
+    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/test-main/pom.xml') }
 
     it 'should have an artifact id' do
       project.artifact_id.should == 'test-main'
@@ -28,7 +28,7 @@ describe Mvner::Project do
   end
 
   describe "when scanning the test-main maven android project" do
-    let(:project) { Mvner::Project.new 'android-sample/pom.xml' }
+    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/pom.xml') }
 
     it 'should have 1 module located at test-main' do
       project.modules["test-main"].should_not be_nil

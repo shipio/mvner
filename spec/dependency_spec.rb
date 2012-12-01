@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Mvner::Dependency do
 
-  let(:project) { Mvner::Project.new 'android-sample/test-main/pom.xml' }
+  let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/test-main/pom.xml') }
 
   describe "when scanning the test-main maven android project" do
     describe "when evaluating the project's android dependency" do
