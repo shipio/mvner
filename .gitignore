@@ -22,3 +22,5 @@ doc/
 # RM artifacts
 .idea/
 .iml
+
+.DS_Store
