@@ -24,5 +24,9 @@ describe Mvner::RepoScanner do
       scanner.jars.count.should == 0
     end
 
+    it "can be serialized to json (just to make sure there are not circular refs)" do
+      expect{ scanner.projects.to_json }.to_not raise_error
+    end
+
   end
 end

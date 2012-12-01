@@ -22,4 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rake', '~> 10'
   gem.add_development_dependency 'rspec', '~> 2.12'
+  gem.add_development_dependency 'yajl-ruby'
+  gem.add_development_dependency 'yard'
 end
