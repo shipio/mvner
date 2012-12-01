@@ -1,6 +1,7 @@
-# Mvner
+# Mvner (maven-er)
 
-TODO: Write a gem description
+This gem is for reading maven project object models, and specifically to assist in determining package structures for
+ android maven projects. The object model superficially fronts nokogiri backed xpath queries.
 
 ## Installation
 
@@ -18,7 +19,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+scanner = Mvner::RepoScanner.new "android-sample"
+apks = scanner.apks
+apklibs = scanner.apklibs
+jars = scanner.jars
+```
 
 ## Contributing
 
