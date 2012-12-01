@@ -1,15 +1,37 @@
 module Mvner
-  class Project
-    include Mvner::Attributes
+  class Project < Mvner::Artifact
 
-    mvn_attributes %w(/project/ /project/parent/), [:artifact_id, :group_id, :packaging, :name]
-    attr_reader :dependencies
+    mvn_attributes [:packaging, :name],'/project/'
 
-    def initialize path
+    attr_reader :dependencies, :modules, :parent
+
+    def initialize path, parent = nil
       @path = path
+      @parent = parent
       @doc = ::Nokogiri::XML File.open path, 'r'
       @doc = @doc.remove_namespaces!
+      @modules = parent? ? modules_by_path : {}
       @dependencies = @doc.xpath('//dependency').map{|dep| Mvner::Dependency.new(dep)}
+    end
+
+    def parent?
+      module_nodes.length > 0
+    end
+
+    def to_s
+      "Project: " + super
+    end
+
+    private
+
+    def modules_by_path
+      @modules_by_path ||= Hash[module_nodes.map{ |node|
+         [node.content, Mvner::Project.new(File.join(File.dirname(@path), node.content, "pom.xml"), self)]
+      }]
+    end
+
+    def module_nodes
+      @module_nodes ||= @doc.xpath('/project/modules/module')
     end
 
   end

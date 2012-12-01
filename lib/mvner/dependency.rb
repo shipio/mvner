@@ -1,11 +1,14 @@
 module Mvner
-  class Dependency
-    include Mvner::Attributes
+  class Dependency < Mvner::Artifact
 
-    mvn_attributes '', [:group_id, :artifact_id, :version, :type]
+    mvn_attributes :type
 
     def initialize(node)
       @doc = node
+    end
+
+    def to_s
+      "Dependency: #{"type: #{type}" if type}" + super
     end
   end
 end

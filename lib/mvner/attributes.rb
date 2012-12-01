@@ -7,7 +7,8 @@ module Mvner
 
     included do
       class_eval do
-        def self.mvn_attributes(prefix_or_prefixes, symbols)
+        def self.mvn_attributes(symbol_or_symbols, prefix_or_prefixes = '')
+          symbols = symbol_or_symbols.is_a?(Array) ? symbol_or_symbols : [symbol_or_symbols]
           symbols.each do |symbol|
             key = symbol.to_s.camelize(:lower)
             define_method key.underscore.to_sym do
