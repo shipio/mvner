@@ -5,6 +5,7 @@ module Mvner
 
     def initialize(node)
       @doc = node
+      super
     end
 
     def to_s

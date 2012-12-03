@@ -11,6 +11,7 @@ module Mvner
       @doc = @doc.remove_namespaces!
       @modules = parent? ? modules_by_path : {}
       @dependencies = @doc.xpath('//dependency').map{|dep| Mvner::Dependency.new(dep)}
+      super
     end
 
     def parent?

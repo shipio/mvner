@@ -56,4 +56,21 @@ describe Mvner::Project do
 
   end
 
+  describe "when serilizing the test-main maven android project" do
+    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/pom.xml') }
+    let(:proj_json) { JSON.parse(project.to_json) }
+
+    it 'should have an artifact_id' do
+      proj_json["artifact_id"].should == project.artifact_id
+    end
+
+    it 'should have a version' do
+      proj_json["version"].should == project.version
+    end
+
+    it 'should have a group_id' do
+      proj_json["group_id"].should == project.group_id
+    end
+  end
+
 end
