@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Mvner::Project do
   describe "when scanning the test-main maven android project" do
-    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/test-main/pom.xml') }
+    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/test-main/pom.xml'),
+                                       File.join(File.dirname(__FILE__), 'android-sample/')}
 
     it 'should have an artifact id' do
       project.artifact_id.should == 'test-main'
@@ -28,7 +29,8 @@ describe Mvner::Project do
   end
 
   describe "when scanning the test-main maven android project" do
-    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/pom.xml') }
+    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/pom.xml'),
+                                       File.join(File.dirname(__FILE__), 'android-sample/') }
 
     it 'should have 1 module located at test-main' do
       project.modules["test-main"].should_not be_nil
@@ -57,7 +59,8 @@ describe Mvner::Project do
   end
 
   describe "when serilizing the test-main maven android project" do
-    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/pom.xml') }
+    let(:project) { Mvner::Project.new File.join(File.dirname(__FILE__), 'android-sample/pom.xml'),
+                                       File.join(File.dirname(__FILE__), 'android-sample/') }
     let(:proj_json) { JSON.parse(project.to_json) }
 
     it 'should have an artifact_id' do

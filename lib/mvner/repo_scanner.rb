@@ -6,7 +6,7 @@ module Mvner
     def initialize(root = Dir.pwd)
       @root = root
       @projects = Dir.glob(File.join(root, "**/pom.xml")).map { |loc|
-        Project.new(loc)
+        Project.new(loc, root)
       }
     end
 

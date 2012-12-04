@@ -25,7 +25,11 @@ describe Mvner::RepoScanner do
     end
 
     it "can be serialized to json (just to make sure there are not circular refs)" do
-      expect{ scanner.projects.to_json }.to_not raise_error
+      expect { scanner.projects.to_json }.to_not raise_error
+    end
+
+    it "should be have projects with local paths" do
+      scanner.projects.each { |proj| proj.path.include?("android-sample").should == false }
     end
 
   end

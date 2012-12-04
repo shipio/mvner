@@ -3,10 +3,11 @@ module Mvner
 
     mvn_attributes [:packaging, :name],'/project/'
 
-    attr_reader :dependencies, :modules
+    attr_reader :dependencies, :modules, :path
 
-    def initialize path
-      @path = path
+    def initialize path, root
+      @root = root
+      @path = path.gsub(@root[-1] == '/' ? @root : @root + '/', "")
       @doc = ::Nokogiri::XML File.open path, 'r'
       @doc = @doc.remove_namespaces!
       @modules = parent? ? modules_by_path : {}
@@ -26,7 +27,7 @@ module Mvner
 
     def modules_by_path
       @modules_by_path ||= ::HashWithIndifferentAccess[module_nodes.map{ |node|
-         [node.content, Mvner::Project.new(File.join(File.dirname(@path), node.content, "pom.xml"))]
+         [node.content, Mvner::Project.new(File.join(@root, File.dirname(@path), node.content, "pom.xml"), @root)]
       }]
     end
 
